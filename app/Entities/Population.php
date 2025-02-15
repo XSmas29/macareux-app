@@ -8,18 +8,18 @@ use App\Entities\Prefecture;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'populations')]
-class Populations
+class Population
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private int $id;
 
-    #[ORM\ManyToOne(targetEntity: 'Years')]
+    #[ORM\ManyToOne(targetEntity: 'Year')]
     #[ORM\JoinColumn(name: 'year_id', referencedColumnName: 'id')]
     private Year $year;
 
-    #[ORM\ManyToOne(targetEntity: 'Prefectures')]
+    #[ORM\ManyToOne(targetEntity: 'Prefecture')]
     #[ORM\JoinColumn(name: 'prefecture_id', referencedColumnName: 'id')]
     private Prefecture $prefecture;
 

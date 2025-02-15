@@ -14,10 +14,10 @@ class Prefecture
     #[ORM\Column(type: 'integer')]
     private int $id;
 
-    #[ORM\Column(type: 'integer', length: 4)]
+    #[ORM\Column(type: 'string', length: 4)]
     private string $name;
 
-    #[ORM\OneToMany(targetEntity: 'Populations', mappedBy: 'prefecture')]
+    #[ORM\OneToMany(targetEntity: 'Population', mappedBy: 'prefecture')]
     private Collection $populations;
 
     // Getters and setters

@@ -17,7 +17,7 @@ class Year
     #[ORM\Column(type: 'integer', length: 4)]
     private string $name;
 
-    #[ORM\OneToMany(targetEntity: 'Populations', mappedBy: 'year')]
+    #[ORM\OneToMany(targetEntity: 'Population', mappedBy: 'year')]
     private Collection $populations;
 
     // Getters and setters

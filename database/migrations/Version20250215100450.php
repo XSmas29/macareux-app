@@ -23,19 +23,19 @@ final class Version20250215100450 extends AbstractMigration
         $this->addSql(
             'CREATE TABLE years (
             id INT AUTO_INCREMENT NOT NULL,
-            name TINYINT UNSIGNED NOT NULL,
+            name SMALLINT UNSIGNED NOT NULL,
             PRIMARY KEY(id))
-            DEFAULT CHARACTER SET utf8
-            COLLATE `utf8_unicode_ci` ENGINE = InnoDB'
+            DEFAULT CHARACTER SET utf8mb4
+            COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB'
         );
 
         $this->addSql(
             'CREATE TABLE prefectures (
             id INT AUTO_INCREMENT NOT NULL,
-            name TINYINT UNSIGNED NOT NULL,
+            name VARCHAR(25) NOT NULL,
             PRIMARY KEY(id))
-            DEFAULT CHARACTER SET utf8
-            COLLATE `utf8_unicode_ci` ENGINE = InnoDB'
+            DEFAULT CHARACTER SET utf8mb4
+            COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB'
         );
 
         $this->addSql(
@@ -47,8 +47,8 @@ final class Version20250215100450 extends AbstractMigration
             PRIMARY KEY(id),
             CONSTRAINT FK_POPULATION_YEAR FOREIGN KEY (year_id) REFERENCES years (id),
             CONSTRAINT FK_POPULATION_PREFECTURE FOREIGN KEY (prefecture_id) REFERENCES prefectures (id))
-            DEFAULT CHARACTER SET utf8
-            COLLATE `utf8_unicode_ci` ENGINE = InnoDB'
+            DEFAULT CHARACTER SET utf8mb4
+            COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB'
         );
     }
 
