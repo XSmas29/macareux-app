@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\AppController;
+use App\Http\Controllers\PrefectureController;
+use App\Http\Controllers\uploadController;
+use App\Http\Controllers\YearController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -11,4 +13,6 @@ Route::get('/data', function () {
     return view('data');
 })->name('data');
 
-Route::post('/upload', [AppController::class, 'uploadCSV']);
+Route::post('/upload', [uploadController::class, 'uploadCSV']);
+Route::get('/prefectures', [PrefectureController::class, 'getPrefectureList']);
+Route::get('/years', [YearController::class, 'getYearList']);

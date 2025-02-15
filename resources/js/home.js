@@ -71,7 +71,7 @@ window.onload = function() {
 
       const result = await response.json();
       if (!result.error) {
-        notyf.success("File uploaded successfully!");
+        notyf.success(result.message);
       } else {
         for (const [key, value] of Object.entries(result.message)) {
           notyf.error(`${key} error: ${value}`);
@@ -80,8 +80,7 @@ window.onload = function() {
       setloadingUpload(false);
     } catch (error) {
       setloadingUpload(false);
-      notyf.error("Error uploading file");
-      console.error(error);
+      notyf.error(error.message);
     }
   });
 }

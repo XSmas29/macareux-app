@@ -8,7 +8,6 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Macareux</title>
   @vite('resources/css/app.css')
-  @vite('resources/js/home.js')
   </head>
   <body>
   <div class="main min-h-screen [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100">
