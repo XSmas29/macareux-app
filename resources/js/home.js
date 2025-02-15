@@ -21,7 +21,6 @@ FilePond.registerPlugin(
 );
 
 let currentFile = null;
-
 const checkFileType = (file) => {
   console.log(file)
   if (file.fileType !== 'text/csv') {
@@ -47,19 +46,19 @@ window.onload = function() {
   });
 
   document.getElementById('btnUpload').addEventListener('click', async () => {
-    console.log(currentFile);
     if (!currentFile) {
       notyf.error('You must select a csv file before uploading');
       return;
     }
-    // if (currentFile.fileType !== 'text/csv') {
-    //   notyf.error('File must be a csv file');
-    //   return;
-    // }
+
+    if (currentFile.fileType !== 'text/csv') {
+      notyf.error('File must be a csv file');
+      return;
+    }
 
     const formData = new FormData();
     formData.append('file', currentFile.file);
-    // create ajax request to a php api endpoint
+    setloadingUpload(true);
     try {
       const response = await fetch("upload", {
         method: "POST",
@@ -71,21 +70,33 @@ window.onload = function() {
       });
 
       const result = await response.json();
-      console.log(result);
       if (!result.error) {
         notyf.success("File uploaded successfully!");
       } else {
         for (const [key, value] of Object.entries(result.message)) {
-          console.log(`${key}: ${value}`);
           notyf.error(`${key} error: ${value}`);
         }
       }
+      setloadingUpload(false);
     } catch (error) {
+      setloadingUpload(false);
       notyf.error("Error uploading file");
       console.error(error);
     }
   });
 }
+
+const setloadingUpload = (loading) => {
+  const btnUpload = document.getElementById('btnUpload');
+  if (loading) {
+    document.getElementById("btnUpload").disabled = true;
+    btnUpload.innerHTML = '<span class="loading loading-spinner text-primary-content"></span>';
+  } else {
+    document.getElementById("btnUpload").disabled = false;
+    btnUpload.innerHTML = `<i class="fa-solid fa-arrow-up-from-bracket"></i>
+            <div>Upload CSV</div>`;
+  }
+};
 
 const uploadCSV = async () => {
   if (!currentFile) {

@@ -16,9 +16,9 @@
               />
           </form>
 
-          <button class="btn btn-primary mt-4 hover:bg" id="btnUpload">
+          <button class="btn btn-primary mt-4 hover:bg disabled:bg-primary disabled:opacity-50" id="btnUpload">
             <i class="fa-solid fa-arrow-up-from-bracket"></i>
-            Upload CSV
+            <div>Upload CSV</div>
           </button>
         </div>
       </div>
