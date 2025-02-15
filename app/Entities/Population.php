@@ -66,8 +66,8 @@ class Population
   {
     return [
       'id' => $this->getId(),
-      'year' => $this->getYear()->getName(),
-      'prefecture' => $this->getPrefecture()->getName(),
+      'year' => $this->getYear()->toArray(),
+      'prefecture' => $this->getPrefecture()->toArray(),
       'value' => $this->getValue(),
     ];
   }

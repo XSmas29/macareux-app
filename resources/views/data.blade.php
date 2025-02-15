@@ -22,8 +22,14 @@
               </div>
             </div>
           </form>
-          <button class="btn btn-primary mt-4 hover:bg disabled:bg-primary disabled:opacity-50" id="btnUpload">
-            <div>Search Population Data</div>
+          <div class=" transition-all duration-300 ease-in-out" id="populationDiv">
+            <div class="mt-8 transition-opacity duration-800 ease-in-out text-center opacity-0">
+              <div id="populationTitle" class="text-2xl"></div>
+              <div class="flex mt-4 text-xl font-bold items-center justify-center gap-2"><div id="populationValue"></div><span class="font-normal">people</span></div>
+            </div>
+          </div>
+          <button class="btn btn-primary hover:bg disabled:bg-primary disabled:opacity-50" id="btnSearch">
+            <i class="fa-solid fa-search"></i><div>Search population data</div>
           </button>
         </div>
       </div>

@@ -5,15 +5,16 @@ import 'notyf/notyf.min.css'; // for React,
 
 const notyf = new Notyf();
 
-document.addEventListener('DOMContentLoaded', () => {
+window.onload = () => {
   loadPrefecture();
   loadYear();
-}, false);
+
+  document.getElementById('btnSearch').addEventListener('click', loadPopulationData);
+};
 
 const setLoadingPrefectures = (loading) => {
   const select = document.querySelector('#selectPrefecture');
   const load = document.querySelector('#divSelectPrefecture .skeleton');
-  console.log(loading)
   if (loading) {
     select.classList.add('hidden');
     load.classList.remove('hidden');
@@ -97,4 +98,62 @@ const loadYear = async () => {
     setLoadingYears(false);
     notyf.error(error.message);
   }
+}
+
+const setLoadingPopulation = (loading) => {
+  const btn = document.getElementById('btnSearch');
+
+  if (loading) {
+    btn.disabled = true;
+    btn.innerHTML = '<span class="loading loading-spinner text-primary-content"></span>';
+  } else {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-search"></i><div>Search population data</div>';
+  }
+}
+
+const loadPopulationData = async () => {
+  const prefecture = document.getElementById('selectPrefecture').value;
+  const year = document.getElementById('selectYear').value;
+  if (!prefecture || !year) {
+    notyf.error('You must select a prefecture and a year');
+    return;
+  }
+
+  setLoadingPopulation(true);
+  try {
+    const response = await fetch(`population?prefecture_id=${prefecture}&year_id=${year}`);
+    const result = await response.json();
+
+    if (!result.error) {
+      fillPopulationData(result.data);
+    } else {
+    notyf.error(result.message);
+    }
+
+    setLoadingPopulation(false);
+  } catch (error) {
+    setLoadingPopulation(false);
+    notyf.error(error.message);
+  }
+}
+
+const fillPopulationData = (data) => {
+  const div = document.getElementById('populationDiv');
+  div.classList.remove('h-0');
+  div.classList.add('h-[200px]');
+
+  const content = document.querySelector('#populationDiv *');
+  content.classList.remove('opacity-0');
+  content.classList.add('opacity-100');
+
+  const title = document.getElementById('populationTitle');
+  title.innerHTML = `Population in ${data.prefecture.name} in ${data.year.name} is :`;
+
+  const value = document.getElementById('populationValue');
+  value.innerHTML = formatNumber(data.value);
+}
+
+const formatNumber = (number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
