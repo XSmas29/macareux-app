@@ -28,8 +28,8 @@ class PopulationController extends Controller
         'prefecture' => $prefectureId,
         'year' => $yearId
       ]);
-
-      $ret = $populationData->toArray();
+      $ret = null;
+      if ($populationData) $ret = $populationData->toArray();
       return response()->json(['message' => 'Population data retrieved successfully', 'data' => $ret], 200);
     } catch (\Exception $e) {
       return response()->json(['error' => true, 'message' => $e->getMessage()], 500);

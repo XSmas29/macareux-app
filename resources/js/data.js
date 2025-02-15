@@ -147,11 +147,18 @@ const fillPopulationData = (data) => {
   content.classList.remove('opacity-0');
   content.classList.add('opacity-100');
 
+  if (!data) {
+    const title = document.getElementById('populationTitle');
+    title.innerHTML = 'Population data';
+    const value = document.getElementById('populationValue');
+    value.innerHTML = 'Population data not found';
+    return;
+  }
   const title = document.getElementById('populationTitle');
   title.innerHTML = `Population in ${data.prefecture.name} in ${data.year.name} is :`;
 
   const value = document.getElementById('populationValue');
-  value.innerHTML = formatNumber(data.value);
+  value.innerHTML = `<div>${formatNumber(data.value)} people</div>`
 }
 
 const formatNumber = (number) => {

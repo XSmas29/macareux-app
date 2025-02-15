@@ -6,7 +6,7 @@
     <div class="col-span-12 md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3 xl:col-span-6 xl:col-start-4">
       <div class="card bg-gray-300 text-primary-content">
         <div class="card-body p-5">
-          <h2 class="card-title mb-4">Search Data</h2>
+          <h2 class="card-title mb-4">Search Population Data</h2>
           <form>
             @csrf
             <div class="grid grid-cols-12 gap-2">
@@ -22,10 +22,12 @@
               </div>
             </div>
           </form>
-          <div class=" transition-all duration-300 ease-in-out" id="populationDiv">
-            <div class="mt-8 transition-opacity duration-800 ease-in-out text-center opacity-0">
-              <div id="populationTitle" class="text-2xl"></div>
-              <div class="flex mt-4 text-xl font-bold items-center justify-center gap-2"><div id="populationValue"></div><span class="font-normal">people</span></div>
+          <div class="transition-all duration-300 ease-in-out flex justify-center items-center" id="populationDiv">
+            <div class="stats p-6 shadow transition-opacity duration-800 ease-in-out text-center opacity-0 w-full bg-slate-100">
+              <div class="stat">
+                <div id="populationTitle" class="stat-title text-primary-content"></div>
+                <div id="populationValue" class="stat-value mt-3 text-primary-content"></div>
+              </div>
             </div>
           </div>
           <button class="btn btn-primary hover:bg disabled:bg-primary disabled:opacity-50" id="btnSearch">
