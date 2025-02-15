@@ -1,20 +1,103 @@
 import './bootstrap';
-import Dropzone from 'dropzone';
+import * as FilePond from "filepond";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
+import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
+import FilePondPluginImageEdit from "filepond-plugin-image-edit";
+import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
+import { Notyf } from 'notyf';
+import 'filepond/dist/filepond.min.css';
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import 'notyf/notyf.min.css'; // for React, Vue and Svelte
 
-Dropzone.autoDiscover = false;
+const notyf = new Notyf();
+
+FilePond.registerPlugin(
+  FilePondPluginImagePreview,
+  FilePondPluginImageExifOrientation,
+  FilePondPluginFileValidateSize,
+  FilePondPluginImageEdit,
+  FilePondPluginFileValidateType,
+);
+
+let currentFile = null;
+
+const checkFileType = (file) => {
+  console.log(file)
+  if (file.fileType !== 'text/csv') {
+    notyf.error('File must be a csv file');
+    return false;
+  }
+  return true;
+};
+
 window.onload = function() {
-    let dropzone = new Dropzone('#csvDropzone', {
-        url: '/upload',
-        maxFilesize: 3,
-        acceptedFiles: '.jpg, .jpeg, .png, .gif'
-    });
+  const fileInput = FilePond.create(document.querySelector('input[type="file"]'), {
+    allowPaste: false,
+    checkValidity: true,
+    allowFileTypeValidation: true,
+    beforeAddFile: checkFileType,
+    beforeDropFile: checkFileType,
+  });
+  fileInput.on('addfile', (error, file) => {
+    currentFile = file;
+  });
+  fileInput.on('error', (error, file) => {
+    notyf.error('File must be a csv file');
+  });
 
-    dropzone.on('complete', function(file) {
-        let response = JSON.parse(file.xhr.response);
-        let image = response.image;
+  document.getElementById('btnUpload').addEventListener('click', async () => {
+    console.log(currentFile);
+    if (!currentFile) {
+      notyf.error('You must select a csv file before uploading');
+      return;
+    }
+    // if (currentFile.fileType !== 'text/csv') {
+    //   notyf.error('File must be a csv file');
+    //   return;
+    // }
 
-        let imageElement = document.createElement('img');
-        imageElement.src = image;
-        document.querySelector('.images').appendChild(imageElement);
-    });
+    const formData = new FormData();
+    formData.append('file', currentFile.file);
+    // create ajax request to a php api endpoint
+    try {
+      const response = await fetch("upload", {
+        method: "POST",
+        body: formData,
+        headers: {
+          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+          'accept': 'multipart/form-data',
+        }
+      });
+
+      const result = await response.json();
+      console.log(result);
+      if (!result.error) {
+        notyf.success("File uploaded successfully!");
+      } else {
+        for (const [key, value] of Object.entries(result.message)) {
+          console.log(`${key}: ${value}`);
+          notyf.error(`${key} error: ${value}`);
+        }
+      }
+    } catch (error) {
+      notyf.error("Error uploading file");
+      console.error(error);
+    }
+  });
 }
+
+const uploadCSV = async () => {
+  if (!currentFile) {
+    notyf.error('You must select a csv file to upload');
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('file', file.file);
+  const response = await fetch('/upload', {
+      method: 'POST',
+      body: formData,
+  });
+  const data = await response.json();
+};
