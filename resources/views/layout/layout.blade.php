@@ -10,7 +10,7 @@
   @vite('resources/css/app.css')
   </head>
   <body>
-  <div class="main min-h-screen [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100">
+  <div class="main bg-gray-100 dark:bg-gray-800 min-h-screen text-black:-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-gray-100">
     <nav class="sticky top-0 z-10">
     <div class="navbar bg-primary text-primary-content">
         <div class="flex-1">
@@ -18,8 +18,8 @@
         </div>
         <div class="flex-none">
         <ul class="menu menu-horizontal px-1 text-xl font-semibold gap-4">
-        <li><a class="hover:bg-indigo-200 {{request()->routeIs('home') ? 'font-bold bg-indigo-300' : ''}}" href={{route('home')}}>Upload CSV</a></li>
-        <li><a class="hover:bg-indigo-200 {{request()->routeIs('data') ? 'font-bold bg-indigo-300' : ''}}" href={{route('data')}}>View Data</a></li>
+        <li><a class="hover:bg-indigo-400 {{request()->routeIs('home') ? 'font-bold bg-indigo-400' : ''}}" href={{route('home')}}>Upload CSV</a></li>
+        <li><a class="hover:bg-indigo-400 {{request()->routeIs('data') ? 'font-bold bg-indigo-400' : ''}}" href={{route('data')}}>View Data</a></li>
         </ul>
         </div>
     </div>

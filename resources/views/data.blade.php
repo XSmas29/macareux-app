@@ -4,7 +4,7 @@
   @vite('resources/js/data.js')
   <div class="grid grid-cols-12 gap-4 p-4">
     <div class="col-span-12 md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3 xl:col-span-6 xl:col-start-4">
-      <div class="card bg-gray-300 text-primary-content">
+      <div class="card bg-gray-300 dark:text-primary-content">
         <div class="card-body p-5">
           <h2 class="card-title mb-4">Search Population Data</h2>
           <form>
@@ -25,8 +25,8 @@
           <div class="transition-all duration-300 ease-in-out flex justify-center items-center" id="populationDiv">
             <div class="stats p-6 shadow transition-opacity duration-800 ease-in-out text-center opacity-0 w-full bg-slate-100">
               <div class="stat">
-                <div id="populationTitle" class="stat-title text-primary-content"></div>
-                <div id="populationValue" class="stat-value mt-3 text-primary-content"></div>
+                <div id="populationTitle" class="stat-title dark:text-primary-content"></div>
+                <div id="populationValue" class="stat-value mt-3 dark:text-primary-content"></div>
               </div>
             </div>
           </div>
