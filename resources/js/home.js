@@ -72,12 +72,19 @@ window.onload = function() {
       const result = await response.json();
       if (!result.error) {
         notyf.success(result.message);
+        setloadingUpload(false);
+        return;
       } else {
+        if (typeof result.message === 'string') {
+            notyf.error(result.message);
+            setloadingUpload(false);
+            return;
+        }
         for (const [key, value] of Object.entries(result.message)) {
           notyf.error(`${key} error: ${value}`);
         }
+        setloadingUpload(false);
       }
-      setloadingUpload(false);
     } catch (error) {
       setloadingUpload(false);
       notyf.error(error.message);

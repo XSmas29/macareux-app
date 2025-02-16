@@ -36,7 +36,6 @@ class uploadController extends Controller
       $handle = fopen($file->getPathname(), 'r');
       $is_content = false;
       $years = [];
-
       while (($row = fgetcsv($handle)) !== false) {
         // Convert from Shift JIS to UTF-8
         $row = array_map(fn($col) => mb_convert_encoding($col, 'UTF-8', 'SJIS-win'), $row);
@@ -45,6 +44,11 @@ class uploadController extends Controller
           $currentPrefecture = null;
           for ($i = 0; $i < count($row); $i++) {
             if ($i === 0) {
+              // check prefecture format
+              if (!is_string($row[$i])) {
+                throw new \Exception('Invalid data format');
+              }
+              // insert prefecture to database
               $prefecture_exist = $this->entityManager->getRepository(Prefecture::class)->findOneBy(['name' => $row[$i]]);
               if (!$prefecture_exist) {
                 $prefecture = new Prefecture();
@@ -58,7 +62,11 @@ class uploadController extends Controller
               continue;
             }
 
-            // // insert population to database
+            // check population format
+            if (!is_numeric($row[$i])) {
+              continue;
+            }
+            // insert population to database
             if ($years[$i] && $currentPrefecture && is_numeric($row[$i])) {
               $population_exist = $this->entityManager->getRepository(Population::class)->findOneBy(['year' => 1 * $years[$i], 'prefecture' => $row[0]]);
 
@@ -75,11 +83,18 @@ class uploadController extends Controller
               $this->entityManager->persist($population);
             }
           }
+          continue;
         }
-        if (!$is_content && count(array_slice($row, 1)) === count(array_filter($row, 'is_numeric')) && count(array_filter($row, 'is_numeric')) > 0) {
+
+        $header = array_slice($row, 1);
+        if (!$is_content && count($header) === count(array_filter($header, 'is_numeric')) && count(array_filter($header, 'is_numeric')) > 0) {
           $is_content = true;
           $years = $row;
           for ($i = 1; $i < count($years); $i++) {
+            //check if year format is correct (4 digit number)
+            if (!is_numeric($years[$i]) || strlen($years[$i]) !== 4) {
+              throw new \Exception('Invalid header format');
+            }
             // insert year to database
             $year_exist = $this->entityManager->getRepository(Year::class)->findOneBy(['name' => 1 * $years[$i]]);
             if ($year_exist) {
