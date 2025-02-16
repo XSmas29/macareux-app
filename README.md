@@ -1,66 +1,178 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# App Installation
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Prerequisites
 
-## About Laravel
+- ### Install [PHP 8.2](https://www.php.net/downloads.php) 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Download the PHP (8.2 or newer) installation ZIP from the link above. After downloading the file, extract the ZIP inside your local computer.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+After that,register extracted folder path to you computer's PATH environment variable. the path might me something like this
+>C:\php-8.4.4
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+To check if php is installed correctly, you can open terminal and input the command below
 
-## Learning Laravel
+```
+php -v
+```
+If the command return text similar to example below, that means php is already installed correctly
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```
+PHP 8.4.4 (cli) (built: Feb 11 2025 16:25:02) (ZTS Visual C++ 2022 x64)
+Copyright (c) The PHP Group
+Zend Engine v4.4.4, Copyright (c) Zend Technologies
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Next, you need to change some PHP configuration in php.ini file. You need to enable some PHP features.
+>these features usually disabled by default, you can see by ';' at the start of the line <br>
+You need to remove the ';' at the start of the line to enable it.<br>
+The code below are the features that you need to enable.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```
+;extension=openssl // change this line to extension=openssl
+;extension=fileinfo
+;extension=zip
+;extension=mbstring
+;extension=pdo_mysql
+;extension_dir = "ext" // change this only if you're using windows
+```
 
-## Laravel Sponsors
+- ### Install [Composer 2.8](https://getcomposer.org/download)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Download Composer-Setup.exe from the link above. after that, proceed with the installation using the Composer-Setup.exe.
 
-### Premium Partners
+To check if composer is installed correctly, you can open terminal and input the command below
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+```
+composer -v
+```
 
-## Contributing
+If the command return text similar to example below, that means composer is already installed correctly, and you may continue to the next step
+```
+   ______
+  / ____/___  ____ ___  ____  ____  ________  _____
+ / /   / __ \/ __ `__ \/ __ \/ __ \/ ___/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ (__  )  __/ /
+\____/\____/_/ /_/ /_/ .___/\____/____/\___/_/
+                    /_/
+Composer version 2.8.5 2025-01-21 15:23:40
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Usage:
+  command [options] [arguments]
+  ...
+```
 
-## Code of Conduct
+- ### Install [Node.js 20](https://nodejs.org/en/download)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Install Node.js 20 using the instruction from link above.
 
-## Security Vulnerabilities
+To check if Node.js is installed correctly, you can open terminal and input the command below
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```
+node -v
+```
+If the command return text similar to example below, that means node.js is already installed correctly
 
-## License
+```
+v20.16.0
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Install [MySQL 8](https://dev.mysql.com/downloads/installer)
+
+Install MySQL 8 using the instruction from link above.
+
+After completing installation, register the installation folder to your PATH environment variable. the path might be something like this
+>C:\Program Files\MySQL\MySQL Server 8.0\bin
+
+To check if MySQL is installed correctly, you can open terminal and input the command below
+
+```
+mysql -V
+```
+If the command return text similar to example below, that means mysql is already installed correctly
+
+```
+mysql  Ver 8.0.39 for Win64 on x86_64 (MySQL Community Server - GPL)
+```
+
+Next, you need to make a database named 'macareux'. You can use this command below to do it.
+```
+mysql -u root -p
+```
+You will be prompted to input your password. type in the password you created when you install mysql. after login success, you can create the database using this command below.
+
+```
+create database macareux;
+```
+
+## Step 1 - Install composer packages
+
+In this step, you will be installing all the packages that are used in composer. First, you need to open a terminal and go to project's folder.
+
+After that, you can type this command in your terminal
+```
+composer install
+```
+Please wait until the installation are completed.
+
+## Step 2 - Install NPM packages
+
+In this step, you will be installing all the packages that are used in NPM. First, you need to open a terminal and go to project's folder.
+
+After that, you can type this command in your terminal
+```
+npm install
+```
+Please wait until the installation are completed.
+
+## Step 3 - Change .env configuration
+
+In this step, you will be setting up the configuration file for this app.
+
+In the project folder, you will see a file named .env.example. You need to duplicate that file and rename it to .env
+
+After that, you can change the configuration file according to your preferences.<br>for example, you can set the mysql password by changing the DB_PASSWORD value in the .env file, etc.
+
+```
+DB_CONNECTION="pdo_mysql"
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=macareux
+DB_USERNAME=root
+DB_PASSWORD= 
+VITE_APP_NAME="${APP_NAME}"
+
+APP_NAME=Macareux
+APP_ENV=local
+APP_KEY=base64:cUm2G5I8nwmi7JySSQMDomfAo5LLo3iiaVMvQ+MbJDw=
+APP_TIMEZONE=UTC
+APP_URL=http://localhost
+
+CACHE_STORE=file
+SESSION_DRIVER=file
+```
+
+## Step 4 - Database migration
+
+In this step, you will be doing database migration using Doctrine. First, you need to open a terminal and go to project's folder.
+After that, you can type this command in your terminal
+```
+php vendor/bin/doctrine-migrations migrate --no-interaction
+```
+
+## Step 5 - Deploying application in local server
+
+In this step, you will be deploying this app in your local server. For this step, you need to open 2 separate terminal.
+
+In first terminal, you need to execute this command
+
+```
+npm run dev
+```
+
+In second terminal, you need to execute this command
+
+```
+php artisan serve
+```
+
+After executing those 2 commands, you should be able to see the application at [127.0.0.1:8000](127.0.0.1:8000)
